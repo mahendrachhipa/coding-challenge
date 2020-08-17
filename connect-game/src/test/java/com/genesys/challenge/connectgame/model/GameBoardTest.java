@@ -1,39 +1,36 @@
 package com.genesys.challenge.connectgame.model;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SpringRunner.class)
 public class GameBoardTest {
     private static final int MAXCOLUMN = 9;
     private static final int MAXROW = 6;
     GameBoard boardUnderTest;
 
-    @Before
-    public void setup(){
+    @BeforeEach
+    void setup(){
         boardUnderTest = new GameBoard("A");
         boardUnderTest.setPlayerB("B");
     }
 
     @Test
-    public void when_play_is_called_first_time_gameStatus_setTo_turnB(){
+    void when_play_is_called_first_time_gameStatus_setTo_turnB(){
         boardUnderTest.play("A",5);
         assert(boardUnderTest.getGameStatus().equals("B turn"));
     }
     @Test
-    public void when_play_is_called_second_time_gameStatus_setTo_turnA(){
+    void when_play_is_called_second_time_gameStatus_setTo_turnA(){
         boardUnderTest.play("A",5);
         boardUnderTest.play("B",5);
         assert(boardUnderTest.getGameStatus().equals("A turn"));
     }
 
     @Test
-    public void when_horizontal_five_occupied_by_A_gameStatus_setTo_AWon(){
+    void when_horizontal_five_occupied_by_A_gameStatus_setTo_AWon(){
         boardUnderTest.play("A",5);
         boardUnderTest.play("B",1);
         boardUnderTest.play("A",4);
@@ -47,7 +44,7 @@ public class GameBoardTest {
     }
 
     @Test
-    public void when_vertical_five_occupied_by_B_gameStatus_setTo_BWon(){
+    void when_vertical_five_occupied_by_B_gameStatus_setTo_BWon(){
         boardUnderTest.play("A",5);
         boardUnderTest.play("B",1);
         boardUnderTest.play("A",4);
@@ -62,7 +59,7 @@ public class GameBoardTest {
     }
 
     @Test
-    public void when_diagonal_LR_five_occupied_by_A_gameStatus_setTo_AWon(){
+    void when_diagonal_LR_five_occupied_by_A_gameStatus_setTo_AWon(){
         List<List<Integer>> board = new ArrayList<>();
         initializeBoard(board);
         //First column
@@ -91,7 +88,7 @@ public class GameBoardTest {
     }
 
     @Test
-    public void when_diagonal_RL_five_occupied_by_B_gameStatus_setTo_BWon(){
+    void when_diagonal_RL_five_occupied_by_B_gameStatus_setTo_BWon(){
         List<List<Integer>> board = new ArrayList<>();
         initializeBoard(board);
         //Ninth column
