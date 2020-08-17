@@ -13,12 +13,16 @@ public class ConnectGame {
         GameBoard gameBoard;
         if(!waitingGames.isEmpty()){
             gameBoard = waitingGames.poll();
-            gameBoard.setPlayerB(playerName);
-            activeGames.put(gameBoard.getGameId(),gameBoard);
-        } else {
-            gameBoard = new GameBoard(playerName);
-            waitingGames.add(gameBoard);
+            if(!gameBoard.getPlayerA().equals(playerName)) {
+                gameBoard.setPlayerB(playerName);
+                activeGames.put(gameBoard.getGameId(),gameBoard);
+                return gameBoard;
+            } else {
+                waitingGames.add(gameBoard);
+            }
         }
+        gameBoard = new GameBoard(playerName);
+        waitingGames.add(gameBoard);
         return gameBoard;
     }
 
