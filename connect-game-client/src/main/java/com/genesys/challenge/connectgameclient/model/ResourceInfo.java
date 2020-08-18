@@ -1,5 +1,7 @@
 package com.genesys.challenge.connectgameclient.model;
 
+import com.genesys.challenge.connectgameclient.player.ShutdownManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,6 +18,8 @@ public class ResourceInfo {
     protected String playUri = "/game";
     protected String gameInfoUri = "/gameinfo/{gameId}";
     protected RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    ShutdownManager shutdownManager;
 
     public void displayBoard(GameBoard gameBoard) {
         List<List<Integer>> board = gameBoard.getBoard ();
@@ -65,9 +69,17 @@ public class ResourceInfo {
             if(gameBoard.getGameStatus().equals(firstPlayer+" turn")) {
                 displayBoard(gameBoard);
                 System.out.print(String.format("It's your turn %s, please enter column (1-9) : ",firstPlayer));
+                while(!sc.hasNextInt()) {
+                    System.out.println("Please enter numeric value.");
+                    sc.nextLine();
+                }
                 int column = sc.nextInt();
                 while(!validateColumn(column,gameBoard)) {
                     System.out.println("Please Enter valid column:");
+                    while(!sc.hasNextInt()) {
+                        System.out.println("Please enter numeric value.");
+                        sc.nextLine();
+                    }
                     column = sc.nextInt();
                 }
                 PlayData playData = new PlayData(gameBoard.getGameId(),firstPlayer,column);
@@ -97,5 +109,6 @@ public class ResourceInfo {
         } else {
             System.out.println("Congratulations " + secondPlayer + " You Won!");
         }
+        shutdownManager.initiateShutdown(0);
     }
 }

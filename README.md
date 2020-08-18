@@ -18,7 +18,7 @@ This directory contains the jar files for connecr-game server and connect game c
 
 1. Go to the directory where connect-game-0.0.1-SNAPSHOT.jar is saved
 
-2. Run the following command to start the connect-game server
+2. Run the following command to start the connect-game server  
    $ java -jar connect-game-0.0.1-SNAPSHOT.jar
 
 ## Running the Connect-Game clients from command line
