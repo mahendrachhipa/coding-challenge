@@ -8,6 +8,18 @@ public class PlayData {
     private String playerName;
     private int column;
 
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
     public String getGameId() {
         return gameId;
     }
