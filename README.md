@@ -11,6 +11,9 @@ This directory contains the maven project for the connect-game server.
 ### connect-game-client
 This directory contains the maven project for the connect-game-client
 
+### server-client-jars
+This directory contains the jar files for connecr-game server and connect game client
+
 ## Running the Connect-Game server from command line
 
 1. Go to the directory where connect-game-0.0.1-SNAPSHOT.jar is saved
@@ -27,5 +30,19 @@ This directory contains the maven project for the connect-game-client
 3. Run the following command in both terminals to start the clients :   
    $ java -jar connect-game-client-0.0.1-SNAPSHOT.jar
 
-4. If clients needs to be run from different machines, provide server ip address and port with command :  
+4. If clients needs to be run from different machines, provide server ip address and port with command where server is running, example:  
    $  java -jar connect-game-client-0.0.1-SNAPSHOT.jar --destination.address=http://10.120.93.154:8190 
+
+## To build the connect-game server
+
+1. Go to connect-game directory.
+
+2. Run following command :  
+   $ mvn clean install
+
+## To build the connect-game-client 
+
+1. Go to connect-game-client directory.
+
+2. Run following command :  
+   $ mvn clean install
