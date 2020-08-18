@@ -5,6 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+/*
+ *This class is responsible for exiting the application once game is complete.
+ */
 @Component
 public class ShutdownManager {
     @Autowired

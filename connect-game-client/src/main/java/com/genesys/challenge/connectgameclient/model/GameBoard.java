@@ -2,7 +2,11 @@ package com.genesys.challenge.connectgameclient.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+ * This class is responsible for holding the information about the game
+ * between two players.Information include players name, game id, status
+ * of the game, and board information.
+ */
 public class GameBoard {
     private String playerA;
     private String playerB;

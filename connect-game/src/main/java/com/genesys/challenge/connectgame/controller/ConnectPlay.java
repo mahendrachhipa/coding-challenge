@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+/*
+ * This class contains all the rest endpoints methods
+ */
 @Controller
 public class ConnectPlay {
     @Autowired

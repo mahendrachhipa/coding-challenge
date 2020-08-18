@@ -10,7 +10,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-
+/*
+ * This class is responsible for sending requests to server, displaying board
+ * at terminal,and validating user inputs.
+ */
 public class ResourceInfo {
     @Value("${destination.address}")
     protected String destAddress;
@@ -21,6 +24,9 @@ public class ResourceInfo {
     @Autowired
     ShutdownManager shutdownManager;
 
+    /*
+     * This method display the board in command line
+     */
     public void displayBoard(GameBoard gameBoard) {
         List<List<Integer>> board = gameBoard.getBoard ();
         int [][] boardArray = new int[9][6];
@@ -45,6 +51,10 @@ public class ResourceInfo {
         System.out.println(sb);
     }
 
+    /*
+     * This method validate that entered column is not out of range and
+     * space is available in column.
+     */
     public boolean validateColumn(int column,GameBoard gameBoard) {
         if(column < 1 || column > 9) {
             return false;
@@ -57,10 +67,26 @@ public class ResourceInfo {
         return false;
     }
 
+    /*
+     * This method sends the post request to server with information about
+     * the player choice of column.
+     */
     public GameBoard playTurn(PlayData playData) {
         return restTemplate.postForObject(destAddress+playUri,playData,GameBoard.class);
     }
 
+    /*
+     * This method is executed until the game is over. Following steps are done:
+     * - Informed the first player that second player have joined.
+     * - start a loop until game status changed to won
+     * - display the board and ask the first player to enter the column if it is first
+     * - player turn otherwise ask first player to wait for his/her turn
+     * - take the input from first player and validate the input.
+     * - refresh and display the board and send the request to server
+     * - if server response have game status changed to won, then display
+     * - winning message to both the players. otherwise continue with the loop.
+     * - Once game is over, call shutdown manager to exit the application.
+     */
     public void playGame(GameBoard gameBoard,String firstPlayer, String secondPlayer) {
         int count =0;
         Scanner sc = new Scanner(System.in);

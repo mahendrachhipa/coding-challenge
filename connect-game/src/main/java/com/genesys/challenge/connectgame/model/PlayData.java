@@ -1,5 +1,8 @@
 package com.genesys.challenge.connectgame.model;
 
+/*
+ * this class hold the information needed to play the turn
+ */
 public class PlayData {
     private String gameId;
     private String playerName;

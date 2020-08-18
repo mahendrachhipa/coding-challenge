@@ -1,5 +1,9 @@
 package com.genesys.challenge.connectgameclient.model;
 
+/*
+ * This class hold the information about the column choosen by player
+ * on his/her turn.
+ */
 public class PlayData {
     private String gameId;
     private String playerName;
