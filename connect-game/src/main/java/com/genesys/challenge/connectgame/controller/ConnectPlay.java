@@ -31,4 +31,10 @@ public class ConnectPlay {
     public ResponseEntity<GameBoard> playGame(@RequestBody PlayData playData) {
         return new ResponseEntity<>(connectGameService.play(playData),HttpStatus.OK);
     }
+
+    @RequestMapping(value="/game",method=RequestMethod.DELETE)
+    public ResponseEntity<String> deleteGame() {
+        connectGameService.deleteGame();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

@@ -22,7 +22,7 @@ public class ResourceInfo {
     protected String gameInfoUri = "/gameinfo/{gameId}";
     protected RestTemplate restTemplate = new RestTemplate();
     @Autowired
-    ShutdownManager shutdownManager;
+    protected ShutdownManager shutdownManager;
 
     /*
      * This method display the board in command line
@@ -111,13 +111,20 @@ public class ResourceInfo {
                 PlayData playData = new PlayData(gameBoard.getGameId(),firstPlayer,column);
                 gameBoard = playTurn(playData);
                 displayBoard(gameBoard);
+                count=0;
             } else {
                 if(count%4 == 0) {
                     System.out.println("Wait for "+secondPlayer+ " to play his/her turn");
                 }
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(3000);
                     count++;
+                    if(count >= 20 ) {
+                        System.out.println("Looks like another player is disconnected," +
+                                " please try another game. Bye");
+                        shutdownManager.initiateShutdown(0);
+                        return;
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

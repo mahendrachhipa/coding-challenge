@@ -22,9 +22,10 @@ public class ConnectGamePlayer extends ResourceInfo {
 
     /*
      * This method send the request to server to create the game board for the player.
-     * If other player is not available wait for another player to join.
-     * Depend upon the playerA or PlayerB invoke the playGame method of
-     * playerA and PlayerB..
+     * If other player is not available wait for another player to join for 30 seconds.
+     * If another player joins then depend upon the playerA or PlayerB invoke the playGame method of
+     * playerA and PlayerB
+     * If another player not join within 30 seconds, client will exit
      */
     public void startGame(String playerName) {
         Map <String,String> params = new HashMap<>();
@@ -35,11 +36,19 @@ public class ConnectGamePlayer extends ResourceInfo {
             isPlayerA = true;
         }
         String gameId = gameBoard.getGameId();
+        int waitingCount = 0;
         while (gameBoard == null ||
                 gameBoard.getPlayerB() == null) {
             System.out.println("Waiting for another player to join");
             try {
-                Thread.sleep(3000);
+                Thread.sleep(5000);
+                waitingCount++;
+                if(waitingCount >= 12) {
+                    System.out.println("There is no other player to join, Please try again later");
+                    restTemplate.delete(destAddress+playUri);
+                    shutdownManager.initiateShutdown(0);
+                    return;
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

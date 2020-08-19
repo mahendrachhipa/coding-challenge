@@ -25,4 +25,8 @@ public class ConnectGameService {
         gameBoard.play(playData.getPlayerName(),playData.getColumn() - 1);
         return gameBoard;
     }
+
+    public void deleteGame() {
+        connectGame.deleteGame();
+    }
 }

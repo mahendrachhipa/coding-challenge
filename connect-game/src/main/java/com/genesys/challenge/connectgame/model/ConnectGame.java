@@ -1,9 +1,6 @@
 package com.genesys.challenge.connectgame.model;
 
-import java.util.ArrayDeque;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 
 /*
  * This class is responsible for creating the Game Board and
@@ -44,6 +41,13 @@ public class ConnectGame {
      */
     public GameBoard getGame(String gameId) {
         return activeGames.get(gameId);
+    }
+
+    /*
+     * This method removes the game from waiting queue
+     */
+    public void deleteGame() {
+        waitingGames.poll();
     }
 
 }
