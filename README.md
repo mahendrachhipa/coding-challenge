@@ -1,5 +1,5 @@
 # coding-challenge
-5 in Row Coding Challenge
+5 in Row Game Coding Challenge
 
 This application is developed using Java 1.8 and Springboot 2.2. Prerequisite to run this application is java 1.8
 
